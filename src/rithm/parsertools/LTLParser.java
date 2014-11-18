@@ -5,7 +5,7 @@ import org.antlr.runtime.*;
 import rithm.core.*;
 public class LTLParser extends ParserPlugin<String>{
 	private String SpecLang;
-	
+	ltlgrammarParser parser;
 	public LTLParser(String Lang)
 	{
 		SpecLang = Lang;
