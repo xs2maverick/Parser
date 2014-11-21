@@ -20,6 +20,32 @@ public class ltlgrammarBaseListener implements ltlgrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterUnaryNonTemporal(@NotNull ltlgrammarParser.UnaryNonTemporalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnaryNonTemporal(@NotNull ltlgrammarParser.UnaryNonTemporalContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUnaryTemporal(@NotNull ltlgrammarParser.UnaryTemporalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnaryTemporal(@NotNull ltlgrammarParser.UnaryTemporalContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLtl(@NotNull ltlgrammarParser.LtlContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -27,6 +53,45 @@ public class ltlgrammarBaseListener implements ltlgrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLtl(@NotNull ltlgrammarParser.LtlContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPred(@NotNull ltlgrammarParser.PredContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPred(@NotNull ltlgrammarParser.PredContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBinaryTemporal(@NotNull ltlgrammarParser.BinaryTemporalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBinaryTemporal(@NotNull ltlgrammarParser.BinaryTemporalContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBinaryNonTemporal(@NotNull ltlgrammarParser.BinaryNonTemporalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBinaryNonTemporal(@NotNull ltlgrammarParser.BinaryNonTemporalContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

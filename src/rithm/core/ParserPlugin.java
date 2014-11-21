@@ -1,11 +1,18 @@
 package rithm.core;
 
+import java.util.ArrayList;
+
 
 public abstract class ParserPlugin<Formula> implements RiTHMPlugin{
 
-	private String parser_name;
-	private String parser_type;
-	private static int loaded_count = 0;
+	protected String parser_name;
+	private enum type_enum
+	{
+		NATIVE,
+		JAVA
+	}
+	protected type_enum parser_type;
+	public static int loaded_count = 0;
 	
 	public void set_name(String name)
 	{
@@ -15,13 +22,13 @@ public abstract class ParserPlugin<Formula> implements RiTHMPlugin{
 	{
 		return parser_name;
 	}
-	public void set_type(String type)
+	public void set_type(int type)
 	{
-		parser_type = type;
+		parser_type = type_enum.values()[type];
 	}
-	public String get_type()
+	public int get_type()
 	{
-		return parser_type;
+		return parser_type.ordinal();
 	}
 	abstract public boolean LoadSpecs(String filename);
 	abstract public boolean LoadSpecs(Formula[] Specs);

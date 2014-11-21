@@ -11,12 +11,26 @@ options {
 	
 }
 /* A number: can be an integer value, or a decimal value */
-ltl: Pred 
+ltl: pred 
 	| '(' ltl ')' 
-	| ltl Binary ltl
-	| Unary ltl
+	| unaryNonTemporal ltl
+	| ltl binaryNonTemporal ltl
+	| ltl binaryTemporal ltl
+	| unaryTemporal ltl
 	| ltl WS;
-Pred: [a-z]+ | 'T' | 'F';
-Unary : '<>' | '[]'| '!';
-Binary: 'U' | 'W' | '&&' | '||' | '->' | '<->';
+	
+pred: PREDNAME | 'T[RUE]' | 'F[ALSE]';
+unaryNonTemporal : NOTNODE;
+binaryNonTemporal: ANDNODE | ORNODE | IFFNODE| IFNODE;
+binaryTemporal: UNTILNODE;
+unaryTemporal: EVENTUALLYNODE | GLOBALLYNODE;
+PREDNAME: [a-z_0-9]+;
+ANDNODE: '&&';
+ORNODE: '||';
+IFFNODE: '<->';
+IFNODE: '->';
+UNTILNODE: 'U';
+EVENTUALLYNODE: '<>';
+GLOBALLYNODE: '[]';
+NOTNODE: '!';
 WS : [ \t\r\n]+ -> skip ;
