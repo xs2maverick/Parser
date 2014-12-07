@@ -1,7 +1,7 @@
 package rithm.core;
 
 import java.util.*;
-
+ 
 public abstract class 
 ParserPlugin<Formula, Predicate, T1 extends Collection<? extends Boolean>, T2 extends Collection<Formula>, T3 extends Collection<Predicate>, T4 extends AbstractMap<Formula, String> > 
 implements RiTHMPlugin{
