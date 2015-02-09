@@ -95,6 +95,7 @@ public class LTLParser extends ParserPlugin
      * Collection of Predicates for the specifications parsed by the parser
      * @see #GetPredicates()
      */
+	private HashMap<String, ArrayList<String>> predsForSpec;
 	private ArrayList<String> PredicateList;
 	/**
      * A Map used to maintain the references between specifications and predicates
@@ -129,21 +130,23 @@ public class LTLParser extends ParserPlugin
 		PredicateList = new ArrayList<String>();
 		PredCount = new HashMap<String, Integer>();
 		ErrorMessages = new HashMap<String, String>();
+		predsForSpec = new HashMap<String, ArrayList<String>>();
 	}
 	class RiTHMltlgrammarListener extends ltlgrammarBaseListener
 	{
 		int mode;
-
-		public RiTHMltlgrammarListener(int mode)
+		String spec;
+		public RiTHMltlgrammarListener(int mode, String spec)
 		{
 			super();
 			this.mode = mode;
+			this.spec = spec;
 		}
 		@Override
 		public void enterPred(PredContext ctx) {
 			// TODO Auto-generated method stub
 			super.enterPred(ctx);
-			System.out.println(PredCount.get(ctx.PREDNAME().toString()));
+//			System.out.println(PredCount.get(ctx.PREDNAME().toString()));
 			switch (mode) {
 			case 1:
 				if(!PredicateList.contains(ctx.PREDNAME().toString()))
@@ -158,6 +161,10 @@ public class LTLParser extends ParserPlugin
 				{
 					PredCount.put(ctx.PREDNAME().toString(), 1);
 				}
+				if(!predsForSpec.containsKey(spec))
+					predsForSpec.put(spec, new ArrayList<String>());
+				if(!predsForSpec.get(spec).contains(ctx.PREDNAME().toString()))
+					predsForSpec.get(spec).add(ctx.PREDNAME().toString());
 				break;
 			case 2:
 				if(PredCount.get(ctx.PREDNAME().toString()) <= 1)
@@ -172,6 +179,8 @@ public class LTLParser extends ParserPlugin
 				{
 					PredCount.put(ctx.PREDNAME().toString(), PredCount.get(ctx.PREDNAME().toString())-1);
 				}
+				if(predsForSpec.get(spec).contains(ctx.PREDNAME().toString()))
+					predsForSpec.get(spec).remove(ctx.PREDNAME().toString());
 				break;
 			default:
 				break;
@@ -267,7 +276,7 @@ public class LTLParser extends ParserPlugin
 		ltlErrorListener le2 = new ltlErrorListener();
 		lexer.addErrorListener(le2);
 		CommonTokenStream tokenstream = new CommonTokenStream(lexer);
-		RiTHMltlgrammarListener rllistener = new RiTHMltlgrammarListener(mode);
+		RiTHMltlgrammarListener rllistener = new RiTHMltlgrammarListener(mode, Spec);
 		parser = new ltlgrammarParser(tokenstream);
 		ParseTreeWalker ptwalker = new ParseTreeWalker();
 		parser.removeErrorListeners();
@@ -364,5 +373,10 @@ public class LTLParser extends ParserPlugin
 		SpecList = new ArrayList<String>();
 		return false;
 	}
-	
+	public ArrayList<String> getPredsForSpec(String spec)
+	{
+		if(predsForSpec.containsKey(spec))
+			return predsForSpec.get(spec);
+		return null;
+	}
 }
